@@ -65,3 +65,4 @@ function round(playerPick, computerPick) {
     computerScore++;
   }
 }
+game();
