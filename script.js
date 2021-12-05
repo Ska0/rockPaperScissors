@@ -1,5 +1,6 @@
 const weaponOfChoice = ["rock", "paper", "scissors"];
 let playerScore = 0;
+let roundCount = 0;
 let computerScore = 0;
 function computerPlay() {
   return weaponOfChoice[Math.floor(Math.random() * weaponOfChoice.length)];
@@ -14,6 +15,7 @@ function playerPlay() {
 function game() {
   for (let i = 0; i < 5; i++) {
     round();
+    roundCount++;
   }
   if (playerScore > computerScore) {
     return alert(
@@ -39,12 +41,13 @@ function round(playerPick, computerPick) {
     console.log("You Picked: " + playerPick);
     console.log("The Computer Picked: " + computerPick);
     console.log("It's a tie! choose again!");
-    playerPick = playerPlay();
+      roundCount--;
+    return round();
   } else if (playerPick === "rock" && computerPick != "paper") {
     console.log("You Picked: " + playerPick);
     console.log("The Computer Picked: " + computerPick);
     console.log("you win! your score went up by 1!");
-    playerScore++;
+    return playerScore++;
   } else if (playerPick === "paper" && computerPick != "scissors") {
     console.log("You Picked: " + playerPick);
     console.log("The Computer Picked: " + computerPick);
@@ -58,7 +61,7 @@ function round(playerPick, computerPick) {
   } else {
     console.log("You Picked: " + playerPick);
     console.log("The Computer Picked: " + computerPick);
-    console.log("you lose! " + computerPick + "beats " + playerPick);
+    console.log("you lose! " + computerPick + " beats " + playerPick);
     computerScore++;
   }
 }
