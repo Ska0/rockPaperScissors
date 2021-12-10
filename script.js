@@ -2,67 +2,67 @@ const weaponOfChoice = ["rock", "paper", "scissors"];
 let playerScore = 0;
 let roundCount = 0;
 let computerScore = 0;
+
 function computerPlay() {
   return weaponOfChoice[Math.floor(Math.random() * weaponOfChoice.length)];
 }
 
-function playerPlay() {
-  let pick = prompt("rock, paper, or scissors?");
-  pick = pick.toLowerCase(length);
-  return pick;
-}
+const btns = document.querySelectorAll(".btn");
+btns.forEach((btn) => {
+  btn.addEventListener("click", (e) => {
+    console.log(e.target.id);
+      return round(e.target.id, computerPlay());
+});
+});
+let headerInfo = document.getElementById('header').childNodes;
+let scoreResults = document.getElementById('results').childNodes;
 
-function game() {
-  for (let i = 0; i < 5; i++) {
-    round();
-    roundCount++;
-  }
-  if (playerScore > computerScore) {
-    return alert(
-      "You Win! Final score - Player: " +
-        playerScore +
-        " Computer: " +
-        computerScore
-    );
-  } else if (playerScore < computerScore) {
-    return alert(
-      "You Lose! Final score - Player: " +
-        playerScore +
-        " Computer: " +
-        computerScore
-    );
-  }
-}
+let roundContainer = document.createElement('h3');
 
-function round(playerPick, computerPick) {
-  playerPick = playerPlay();
-  computerPick = computerPlay();
-  if (playerPick === computerPick) {
-    console.log("You Picked: " + playerPick);
-    console.log("The Computer Picked: " + computerPick);
-    console.log("It's a tie! choose again!");
-      roundCount--;
-    return round();
-  } else if (playerPick === "rock" && computerPick != "paper") {
-    console.log("You Picked: " + playerPick);
-    console.log("The Computer Picked: " + computerPick);
-    console.log("you win! your score went up by 1!");
-    return playerScore++;
-  } else if (playerPick === "paper" && computerPick != "scissors") {
-    console.log("You Picked: " + playerPick);
-    console.log("The Computer Picked: " + computerPick);
-    console.log("you win! your score went up by 1!");
+function round(playerChoice, computerPick) {
+  scoreResults[0].innerText = "Round: " + roundCount; 
+  roundCount++;
+  if (playerChoice === computerPick) {
+    roundCount--;
+    headerInfo[0].innerText = "You Tied, why don't you try again?";
+    headerInfo[1].innerText = playerChoice;
+    headerInfo[3].innerText = computerPick;
+  } else if (playerChoice === "rock" && computerPick != "paper") {
+  playerScore++;
+  headerInfo[0].innerText = "Nice one! You won that round";
+  headerInfo[1].innerText = playerChoice;
+  headerInfo[3].innerText = computerPick;
+  } else if (playerChoice === "paper" && computerPick != "scissors") {
     playerScore++;
-  } else if (playerPick === "scissors" && computerPick != "rock") {
-    console.log("You Picked: " + playerPick);
-    console.log("The Computer Picked: " + computerPick);
-    console.log("you win! your score went up by 1!");
+    headerInfo[0].innerText = "Nice one! You won that round!";
+    headerInfo[1].innerText = playerChoice;
+    headerInfo[3].innerText = computerPick;
+  } else if (playerChoice === "scissors" && computerPick != "rock") {
     playerScore++;
+    headerInfo[0].innerText = "Nice one! You won that round!"
+    headerInfo[1].innerText = playerChoice;
+    headerInfo[3].innerText = computerPick;
   } else {
-    console.log("You Picked: " + playerPick);
-    console.log("The Computer Picked: " + computerPick);
-    console.log("you lose! " + computerPick + " beats " + playerPick);
     computerScore++;
+    headerInfo[0].innerText = "You lost this round buddy.";
+    headerInfo[1].innerText = computerPick;
+    headerInfo[3].innerText = playerChoice;
+  }
+
+  scoreResults[0].innerText = "Round: " + roundCount; 
+  scoreResults[1].innerText = "Player: " + playerScore;
+  scoreResults[2].innerText = "Computer: " + computerScore;
+  if (playerScore >= 5) {
+    playerScore = 0;
+    computerScore = 0;
+    roundCount = 0;
+    alert('You Win!');
+  } else if (computerScore >= 5) {
+    playerScore = 0;
+    computerScore = 0;
+    roundCount = 0;
+    alert('You Lose!');
   }
 }
-game();
+
+

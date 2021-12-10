@@ -4,14 +4,26 @@
    <meta charset="UTF-8">
    <meta http-equiv="X-UA-Compatible" content="IE=edge">
    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+   <link rel="stylesheet" href="style.css">
    <title>Document</title>
 </head>
 <body>
+   <div id="header" class="header"><div class="banner"></div><div class="playerPick"></div><span>Beats</span><div class="computerPick"></div></div>
    <div class="container">
-      <button class="btn rock"></button>
-      <button class="btn paper"></button>
-      <button class="btn scissors"></button>
+      <div class="btnContainer">
+         ROCK
+         <button id="rock" class= "btn rock"><img src="rock.png" alt=""></button>
+      </div>
+      <div class="btnContainer">
+         PAPER
+         <button id= "paper" class="btn paper"><img src="paper.png" alt=""></button>
+      </div>
+      <div class="btnContainer">
+         SCISSORS
+         <button id= "scissors" class="btn scissors" ><img src="scissors.png" alt=""></button>
+      </div>
    </div>
+   <div id="results"><div class="round"></div><div class="playerScore"></div><div class="computerScore"></div></div>
    <script src="script.js"></script>
 </body>
 </html>
